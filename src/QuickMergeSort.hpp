@@ -12,7 +12,8 @@ static auto INSERTIONSORTSWITCH = 32;
 template <class RandomIt, class Compare>
 void swap_two_values(RandomIt i1, RandomIt i2, Compare comp)
 {
-    if (comp(*i2, *i1)) {
+    if (comp(*i2, *i1)) 
+    {
         std::iter_swap(i1, i2);
     }
 }
@@ -20,7 +21,8 @@ void swap_two_values(RandomIt i1, RandomIt i2, Compare comp)
 template <class RandomIt, class Compare>
 void insertion_sort(RandomIt first, RandomIt last, Compare comp)
 {
-    for (RandomIt it = first; it != last; ++it) {
+    for (RandomIt it = first; it != last; ++it) 
+    {
         std::rotate(std::upper_bound(first, it, *it, comp), it, std::next(it));
     }
 }
@@ -32,8 +34,10 @@ RandomIt partition_pivot_at_end(RandomIt first, RandomIt last, Compare comp)
     std::iter_swap(first, last - 1);
     RandomIt pivot = last - 1;
     RandomIt i = first - 1;
-    for (; first != last - 1; first++) {
-        if (comp(*first, *pivot)) {
+    for (; first != last - 1; first++) 
+    {
+        if (comp(*first, *pivot)) 
+        {
             i++;
             std::iter_swap(i, first);
         }
@@ -58,16 +62,20 @@ Type calculate_best(Type v1, Type v2)
 template <class RandomIt, class Compare>
 void merge_buffer(RandomIt first1, RandomIt last1, RandomIt first2, RandomIt last2, RandomIt buffer, Compare comp)
 {
-    while (first1 != last1) {
-        if (first1 == first2 || first2 == last2) {
+    while (first1 != last1)
+    {
+        if (first1 == first2 || first2 == last2)
+        {
             std::swap_ranges(first1, last1, buffer);
             return;
         }
-        if (comp(*first1, *first2)) {
+        if (comp(*first1, *first2))
+        {
             std::iter_swap(first1, buffer);
             first1++;
         }
-        else {
+        else
+        {
             std::iter_swap(first2, buffer);
             first2++;
         }
@@ -79,7 +87,8 @@ void merge_buffer(RandomIt first1, RandomIt last1, RandomIt first2, RandomIt las
 template <class RandomIt, class Compare>
 void merge_sort(RandomIt first, RandomIt last, RandomIt buffer, Compare comp)
 {
-    if (std::distance(first, last) <= INSERTIONSORTSWITCH) {
+    if (std::distance(first, last) <= INSERTIONSORTSWITCH)
+    {
         return insertion_sort(first, last, comp);
     }
 
@@ -96,7 +105,8 @@ template <class RandomIt, class Compare = std::less<typename RandomIt::value_typ
 void quick_merge_sort(RandomIt first, RandomIt last, Compare comp = Compare())
 {
     //for small n's use sorting network
-    if (std::distance(first, last) <= INSERTIONSORTSWITCH) {
+    if (std::distance(first, last) <= INSERTIONSORTSWITCH)
+    {
         return insertion_sort(first, last, comp);
     }
     //find good pivot as median of PIVOTSAMPLINGSIZE
@@ -110,11 +120,13 @@ void quick_merge_sort(RandomIt first, RandomIt last, Compare comp = Compare())
     auto I_1 = std::distance(first, middle);
     auto I_2 = std::distance(middle, last);
     //choose optimal sub data set for merge_sort
-    if (calculate_best(I_1, I_2) == I_1) {
+    if (calculate_best(I_1, I_2) == I_1)
+    {
         merge_sort(first, middle, middle, comp);
         quick_merge_sort(middle, last, comp);
     }
-    else {
+    else
+    {
         merge_sort(middle, last, first, comp);
         quick_merge_sort(first, middle, comp);
     }

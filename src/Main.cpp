@@ -12,15 +12,18 @@ int main()
     auto end = std::end(data);
     std::iota(begin, end, 0);
 
-    if ( !shuffle_sort_test(data, "ascending unique values")){
+    if ( !shuffle_sort_test(data, "ascending unique values"))
+    {
         return 1;
     }
 
-    auto comp = [](int rhs, int lhs) {
+    auto comp = [](int rhs, int lhs)
+    {
         return rhs > lhs;
     };
 
-    if ( !shuffle_sort_test(data, "descending unique values", comp)){
+    if ( !shuffle_sort_test(data, "descending unique values", comp))
+    {
         return 1;
     }
 
@@ -28,7 +31,8 @@ int main()
     std::random_shuffle(begin, end); 
     std::fill(begin + data.size() / 2, end, 0);
 
-    if ( !shuffle_sort_test(data, "descending not unique values", comp)){
+    if ( !shuffle_sort_test(data, "descending not unique values", comp))
+    {
         return 1;
     }
 
@@ -38,7 +42,8 @@ int main()
     end = std::end(data);
 
     print(begin, end);
-    if ( !shuffle_sort_test(data, "ascending unique trimmed values")){
+    if ( !shuffle_sort_test(data, "ascending unique trimmed values"))
+    {
         return 1;
     }
     print(begin, end);

@@ -12,9 +12,12 @@ template <class RandomIt>
 void print(RandomIt first, RandomIt last, std::string label = "")
 {
     if (!label.empty())
+    {
         std::cout << label << " :";
+    }
 
-    for (; first != last; first++) {
+    for (; first != last; first++)
+    {
         std::cout << *first << " ";
     }
     std::cout << "\n";
@@ -32,7 +35,8 @@ bool shuffle_sort_test(Container& container, const std::string& label, Compare c
     quick_merge_sort(begin, end);
 
     std::cout<<"Testing "<<label<<"\n";
-    if (!std::is_sorted(begin, end)) {
+    if (!std::is_sorted(begin, end))
+    {
         std::cout<<"Sorting "<<label<<" failed\n";
         return false;
     }
